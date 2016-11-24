@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">New Mail</h3>
+                </div>
+                <div class="panel-body">
+                  {% if merrors %}
+                    <div class="alert alert-danger" role="alert">
+                      {% if additiveerror %}
+                       <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> {{ additiveerror }} <br>
+                      {% endif %}
+                      {% if form.errors %}
+                        {% for error in form.errors %}
+                           <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> invalid data in {{error}} field <br>
+                        {% endfor %}
+                      {% endif %}
+                    </div>
+                  {% endif %}
+                    <form method="post" style="padding: 10px;" class="form-horizontal" action="/mail/send">
+                      {% csrf_token %}
+                          <div class="form-group">
+                            <input name="sender" value="{{user.username}}" type="hidden" />
+                            <label class="control-label" for="id_reciver">reciver:</label>
+                            <input class="form-control" id="id_reciver" name="reciver" type="text" required />
+                            <label class="control-label" for="id_subject">subject:</label>
+                            <input class="form-control" id="id_subject" name="subject" type="text" required />
+                            <label class="control-label" for="id_message">message:</label>
+                            <textarea class="form-control" cols="40" id="id_message" name="message" rows="10" required></textarea>
+                        <p class="bs-component">
+                            <center>
+                                <input class="btn btn-primary" class="form-control" type="submit" value="Send" />
+                            </center>
+                          </div>
+                        </p>
+                        <input type="hidden" name="next" value="/" />
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block javascript %}
+
+
+<script>
+{% if user.is_authenticated %}
+$("#mailm").addClass('active');
+{% endif %}
+</script>
+
+{% endblock %}

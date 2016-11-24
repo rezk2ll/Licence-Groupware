@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<div class="container">
+    <div class="row">
+      <div class="col-md-15 col-md-offset-1">
+          <div class="panel panel-primary">
+              <div class="panel-heading">
+                  <h2 class="panel-title">TODO List
+                    {% if user.is_staff %}
+                    <a href="/tasks/new" class="pull-right"> <span class="glyphicon glyphicon-file pull-right"> </span> New </a>
+                    {% endif %}
+                  </h2>
+              </div>
+              <div class="panel-body">
+                {% if ntasks > 0 %}
+                  {% for task in tasklist %}
+                  {% if task.priority ==  "1" %}
+                  <div class="panel panel-success">
+                  {% elif task.priority == "2" %}
+                  <div class="panel panel-warning">
+                  {% elif task.priority == "3" %}
+                  <div class="panel panel-danger">
+                  {% endif %}
+                    <div class="panel-heading">
+                      {% if user.is_staff %}
+                      <a href="/tasks/edit/{{task.id}}" class="pull-right"> <span class="glyphicon glyphicon-wrench pull-right"></span></a>
+                      <a href="/tasks/delete/{{task.id}}" class="pull-right"> <span class="glyphicon glyphicon-remove pull-right"></span></a>
+                      {% endif %}
+                      <h4> {{ task.subject }} </h4>
+                    </div>
+                    <div class="panel-body">
+                        <div class="list-group-item" role="group">
+                          <div class="btn-group btn-group-justified" role="group" aria-label="...">
+                            <div class="btn-group" role="group">
+                            <strong>  Subject : </strong>
+                            </div>
+                            <div class="btn-group" role="group">
+                              {{ task.subject }}
+                            </div>
+                          </div>
+                        </div>
+                        <div class="list-group-item" role="group">
+                          <div class="btn-group btn-group-justified" role="group" aria-label="...">
+                            <div class="btn-group" role="group">
+                            <strong>  content : </strong>
+                            </div>
+                            <div class="btn-group" role="group">
+                              {{ task.content }}
+                            </div>
+                          </div>
+                        </div>
+                        <div class="list-group-item">
+                          <div class="btn-group btn-group-justified" role="group" aria-label="...">
+                            <div class="btn-group" role="group">
+                              <strong>Priority :</strong>
+                            </div>
+                            <div class="btn-group" role="group">
+                              {% if task.priority == "1" %}
+                              Low
+                              {% elif task.priority == "2" %}
+                              Medium
+                              {% elif task.priority == "3" %}
+                              High
+                              {% endif %}
+                            </div>
+                          </div>
+                        </div>
+                        <div class="list-group-item" role="group">
+                          <div class="btn-group btn-group-justified" role="group" aria-label="...">
+                            <div class="btn-group" role="group">
+                              <strong>Progress :</strong>
+                            </div>
+                            <div class="btn-group" role="group">
+                              <div class="progress progress-striped active">
+                                <div class="progress-bar" role="progressbar" aria-valuenow="{{task.progress}}" aria-valuemin="0" aria-valuemax="100" style="width: {{ task.progress}}%;">{{task.progress}}%</div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+              </div>
+                  {% endfor %}
+                </div>
+                {% else %}
+
+                <div class="alert alert-warning" role="alert"><strong>Sorry ! </strong>you have no tasks available yet</div>
+                {% endif %}
+
+              </div>
+          </div>
+      </div>
+
+    </div>
+</div>
+
+{% endblock %}
+
+{% block javascript %}
+
+
+<script>
+{% if user.is_authenticated %}
+$("#taskm").addClass('active');
+{% endif %}
+</script>
+
+{% endblock %}

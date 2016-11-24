@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-9 col-md-offset-1">
+            <div class="panel panel-warning">
+                <div class="panel-heading">
+                    <h2 class="panel-title">Emails <a href="/mail/send" class="pull-right"> <span class="glyphicon glyphicon-send pull-right"> </span> New </a></h2>
+                </div>
+                <div class="panel-body">
+                  {% if mails %}
+                  <div class="list-group">
+                    {% for email in mails %}
+                      <a class="list-group-item" href="/mail/inbox/{{ email.id }}">
+                        <div class="btn-group btn-group-justified" role="group" aria-label="...">
+                          <div class="btn-group" role="group">
+                            {{ email.sender }}
+                          </div>
+                          <div class="btn-group" role="group">
+                            {{ email.subject }}
+                          </div>
+                          <div class="btn-group" role="group">
+                            <span class="	glyphicon glyphicon-remove pull-right">
+                          </div>
+                        </div>
+                      </a>
+                    {% endfor %}
+                  </div>
+                  {% else %}
+
+                  <div class="alert alert-warning" role="alert"><strong>Sorry ! </strong>you have no mails for now</div>
+                  {% endif %}
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block javascript %}
+
+
+<script>
+{% if user.is_authenticated %}
+$("#mailm").addClass('active');
+{% endif %}
+</script>
+
+{% endblock %}

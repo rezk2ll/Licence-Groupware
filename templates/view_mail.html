@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-9 col-md-offset-1">
+            <div class="panel panel-warning">
+                <div class="panel-heading">
+                    <h3 class="panel-title"> {{ mail.sender }} >> {{ mail.subject }} <a href="/mail/delete/{{mail.id}}"> <span class="glyphicon glyphicon-remove pull-right"></span></a></h3>
+                </div>
+                <div class="panel-body">
+                  <div class="list-group">
+                      <a href="#" class="list-group-item">
+                        <div class="btn-group btn-group-justified" role="group" aria-label="...">
+                          <div class="btn-group" role="group">
+                            From :
+                          </div>
+                          <div class="btn-group" role="group">
+                            {{ mail.sender }}
+                          </div>
+                        </div>
+                      </a>
+                      <a href="#" class="list-group-item">
+                        <div class="btn-group btn-group-justified" role="group" aria-label="...">
+                          <div class="btn-group" role="group">
+                            subject :
+                          </div>
+                          <div class="btn-group" role="group">
+                            {{ mail.subject }}
+                          </div>
+                        </div>
+                      </a>
+                      <div class="list-group-item">
+                        {{ mail.message }}
+                      </div>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block javascript %}
+
+
+<script>
+{% if user.is_authenticated %}
+$("#mailm").addClass('active');
+{% endif %}
+</script>
+
+{% endblock %}
