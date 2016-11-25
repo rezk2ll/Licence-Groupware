@@ -7,14 +7,11 @@
         <div class="col-md-6 col-md-offset-3">
             <div class="panel panel-primary">
                 <div class="panel-heading">
-                    <h3 class="panel-title">{{do}} Task</h3>
+                    <h3 class="panel-title">New Project</h3>
                 </div>
                 <div class="panel-body">
                   {% if errors %}
                     <div class="alert alert-danger" role="alert">
-                      {% if additiveerror %}
-                       <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> {{ additiveerror }} <br>
-                      {% endif %}
                       {% if form.errors %}
                         {% for error in form.errors %}
                            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> invalid data in {{error}} field <br>
@@ -22,13 +19,12 @@
                       {% endif %}
                     </div>
                   {% endif %}
-                  <form action="{{action}}" class="form-group" method="POST">
+                  <form action="/projects/new" class="form-group" method="POST">
                     {% csrf_token %}
                     {{ form.as_table }}
-                    <input type="hidden" value="{{project_id}}" name="projid">
                     <p class="bs-component">
                         <center>
-                            <input class="btn btn-primary" class="form-control" type="submit" value="{{do}}" />
+                            <input class="btn btn-primary" class="form-control" type="submit" value="Create" />
                         </center>
                       </div>
                     </p>
@@ -46,7 +42,7 @@
 
 <script>
 {% if user.is_authenticated %}
-$("#tasks").addClass('active');
+$("#projectm").addClass('active');
 {% endif %}
 </script>
 

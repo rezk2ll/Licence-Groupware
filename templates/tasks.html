@@ -7,9 +7,9 @@
       <div class="col-md-15 col-md-offset-1">
           <div class="panel panel-primary">
               <div class="panel-heading">
-                  <h2 class="panel-title">TODO List
+                  <h2 class="panel-title">Project {{ pname }} >> TODO List
                     {% if user.is_staff %}
-                    <a href="/tasks/new" class="pull-right"> <span class="glyphicon glyphicon-file pull-right"> </span> New </a>
+                    <a href="/projects/{{pid}}/tasks/new" class="pull-right"> <span class="glyphicon glyphicon-file pull-right"> </span> New </a>
                     {% endif %}
                   </h2>
               </div>
@@ -25,7 +25,7 @@
                   {% endif %}
                     <div class="panel-heading">
                       {% if user.is_staff %}
-                      <a href="/tasks/edit/{{task.id}}" class="pull-right"> <span class="glyphicon glyphicon-wrench pull-right"></span></a>
+                      <a href="/projects/{{pid}}/tasks/edit/{{task.id}}" class="pull-right"> <span class="glyphicon glyphicon-wrench pull-right"></span></a>
                       <a href="/tasks/delete/{{task.id}}" class="pull-right"> <span class="glyphicon glyphicon-remove pull-right"></span></a>
                       {% endif %}
                       <h4> {{ task.subject }} </h4>

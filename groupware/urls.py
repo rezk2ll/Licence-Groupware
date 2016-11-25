@@ -20,7 +20,7 @@ from accounts.views import register
 from messaging.views import send_mail , inbox , readmail , deletemail
 from django.contrib.auth.views import login , logout
 from tasks.views import CreateTask , ViewTasks  ,DeleteTask , EditTask
-
+from projects.views import CreateProject , ViewProjects , DeleteProject
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$' , IndexPage),
@@ -31,8 +31,13 @@ urlpatterns = [
     url(r'^mail/send$',send_mail),
     url(r'^mail/inbox/(\d+)$',readmail),
     url(r'^mail/delete/(\d+)$',deletemail),
-    url(r'^tasks/new$',CreateTask),
+    url(r'^projects/(\d+)/tasks/new$',CreateTask),
     url(r'^tasks$',ViewTasks),
     url(r'^tasks/delete/(\d+)$',DeleteTask),
-    url(r'^tasks/edit/(\d+)$',EditTask),
+    url(r'^projects/(\d+)/tasks/edit/(\d+)$',EditTask),
+    url(r'^projects/new$',CreateProject),
+    url(r'^projects$',ViewProjects),
+    url(r'^projects/(\d+)/delete$',DeleteProject),
+    url(r'^projects/(\d+)/tasks$',ViewTasks),
+
 ]

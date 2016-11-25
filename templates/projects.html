@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<div class="container">
+    <div class="row">
+      <div class="col-md-15 col-md-offset-1">
+          <div class="panel panel-primary">
+              <div class="panel-heading">
+                  <h2 class="panel-title">Pojects
+                    {% if user.is_staff %}
+                    <a href="/projects/new" class="pull-right"> <span class="glyphicon glyphicon-file pull-right"> </span> New </a>
+                    {% endif %}
+                  </h2>
+              </div>
+              <div class="panel-body">
+                {% if nprojects > 0 %}
+                  {% for project in projects %}
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      {% if user.is_staff %}
+                      <a href="/projects/{{project.id}}/delete" class="pull-right"> <span class="glyphicon glyphicon-remove pull-right"></span></a>
+                      {% endif %}
+                      <h4> <a href="/projects/{{project.id}}/tasks"> {{ project.name }}</a> </h4>
+                    </div>
+                    <div class="panel-body">
+                        <div class="list-group-item" role="group">
+                          <div class="btn-group btn-group-justified" role="group" aria-label="...">
+                            <div class="btn-group" role="group">
+                              <strong>Progress :</strong>
+                            </div>
+                            <div class="btn-group" role="group">
+                              <div class="progress progress-striped active">
+                                <div class="progress-bar" role="progressbar" aria-valuenow="{{project.progress}}" aria-valuemin="0" aria-valuemax="100" style="width: {{ project.progress}}%;">{{project.progress}}%</div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+              </div>
+                  {% endfor %}
+                </div>
+                {% else %}
+
+                <div class="alert alert-warning" role="alert"><strong>Sorry ! </strong>you have no Porjects available yet</div>
+                {% endif %}
+
+              </div>
+          </div>
+      </div>
+
+    </div>
+</div>
+
+{% endblock %}
+
+{% block javascript %}
+
+
+<script>
+{% if user.is_authenticated %}
+$("#projectm").addClass('active');
+{% endif %}
+</script>
+
+{% endblock %}
