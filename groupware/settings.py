@@ -31,6 +31,8 @@ ALLOWED_HOSTS = []
 STATICFILES_DIRS = [
     BASE_DIR+'/static',
 ]
+
+UPLOAD_DIR = BASE_DIR + "/uploads/"
 # Application definition
 
 INSTALLED_APPS = [
@@ -44,6 +46,8 @@ INSTALLED_APPS = [
     'messaging',
     'tasks',
     'projects',
+    'blog',
+    'files',
 ]
 
 MIDDLEWARE = [

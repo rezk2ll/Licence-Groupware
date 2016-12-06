@@ -9,3 +9,4 @@ class task(models.Model):
     priority= models.CharField(max_length=10)
     content = models.TextField()
     progress= models.DecimalField( max_digits=5, decimal_places=2)
+    workers = models.CharField(max_length=100)

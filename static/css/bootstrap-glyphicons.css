@@ -261,3 +261,33 @@ hr{margin-top:20px;margin-bottom:20px;border:0;border-top:1px solid #eeeeee;}
 .glyphicon-bookmark:before{content:"\1f516";}
 .glyphicon-fire:before{content:"\1f525";}
 .glyphicon-wrench:before{content:"\1f527";}
+
+
+.thumbnail {
+    padding:0px;
+}
+.panel {
+	position:relative;
+}
+.panel>.panel-comment:after,.panel>.panel-comment:before{
+	position:absolute;
+	top:11px;left:-16px;
+	right:100%;
+	width:0;
+	height:0;
+	display:block;
+	content:" ";
+	border-color:transparent;
+	border-style:solid solid outset;
+	pointer-events:none;
+}
+.panel>.panel-comment:after{
+	border-width:7px;
+	border-right-color:#f7f7f7;
+	margin-top:1px;
+	margin-left:2px;
+}
+.panel>.panel-comment:before{
+	border-right-color:#ddd;
+	border-width:8px;
+}

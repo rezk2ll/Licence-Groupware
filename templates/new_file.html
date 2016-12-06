@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<div class="col-md-9 col-md-offset-1">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h3 class="panel-title">New File</h3>
+    </div>
+    <div class="panel-body">
+      {% if form.errors %}
+      <div class="alert alert-danger" role="alert">
+        {% for error in form.errors %}
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> invalid data in {{error}} field <br>
+        {% endfor %}
+      </div>
+      {% endif %}
+
+      <form method="post" style="padding: 10px;" class="form-horizontal" enctype="multipart/form-data" action="/files/new">
+        {% csrf_token %}
+        <div class="form-group">
+          <tr><th><label for="id_description">Description :</label></th><td><input class="form-control" id="id_description" name="description" type="text" required /></td></tr>
+          <tr><th><label for="id_filedata">Document :</label></th><td>
+            <input id="id_filedata" name="filedata" type="file" required class="filestyle" data-buttonName="btn-primary" />
+          </td></tr>
+          <p class="bs-component">
+            <center>
+              <button class="btn btn-primary" class="form-control" type="submit">
+                UPLOAD <span class="glyphicon glyphicon-cloud-upload"></span>
+              </button>
+            </center>
+          </div>
+        </p>
+      </form>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block javascript %}
+
+
+<script>
+{% if user.is_authenticated %}
+$("#filesm").addClass('active');
+{% endif %}
+</script>
+
+{% endblock %}

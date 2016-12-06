@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="col-md-15 col-md-offset-1">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h2 class="panel-title">Files {% if user.is_authenticated %}<a href="/files/new" class="pull-right"> <span class="glyphicon glyphicon-cloud-upload pull-right"> </span> New  </a> {% endif %}</h2>
+    </div>
+    <div class="panel-body">
+      {% if nfiles > 0 %}
+      {% for file in files %}
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4> {{ file.description }} </a><a href="/files/download/{{file.id}}" class="pull-right"> <span class="glyphicon glyphicon-cloud-download pull-right"></span></a> {% if user.is_staff %}<a href="/files/delete/{{file.id}}" class="pull-right"> <span class="glyphicon glyphicon-remove pull-right"></span></a> {% endif %}</h4>
+        </div>
+        <ul class="list-group">
+          <li class="list-group-item active">
+            <span class="badge"> {{ file.owner }}</span>
+            uploaded by
+          </li>
+          <li class="list-group-item active">
+            <span class="badge">{{ file.name }}</span>
+            name
+          </li>
+          <li class="list-group-item active">
+            <span class="badge">{{ file.size }} Kb</span>
+            size
+          </li>
+          <li class="list-group-item active">
+            <span class="badge">{{ file.date }}</span>
+          uploaded on
+          </li>
+        </ul>
+      </div>
+      {% endfor %}
+      {% else %}
+      <div class="alert alert-warning" role="alert"><strong>Sorry ! </strong>No Files Are available yet</div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block javascript %}
+
+
+<script>
+{% if user.is_authenticated %}
+$("#filesm").addClass('active');
+{% endif %}
+</script>
+
+{% endblock %}

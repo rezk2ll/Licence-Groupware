@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="col-md-15 col-md-offset-1">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h2 class="panel-title">Posts {% if user.is_staff %}<a href="/blog/new" class="pull-right"> <span class="glyphicon glyphicon-file pull-right"> </span> New </a> {% endif %}</h2>
+    </div>
+    <div class="panel-body">
+      {% if nposts > 0 %}
+      {% for post in posts %}
+      <div class="panel panel-default">
+        <div class="panel-heading text-center">
+          <h3> <a href="/blog/{{post.id}}" class="blog-post-title">{{ post.title }}</a> {% if user.is_staff %} <a href="/blog/edit/{{post.id}}" class="pull-right"> <span class="glyphicon glyphicon-cog pull-right"> </span></a> <a href="/blog/delete/{{post.id}}" class="pull-right"> <span class="glyphicon glyphicon-remove pull-right"> </span></a> {% endif %}</h3>
+        </div>
+        <ul class="list-group">
+          <li class="list-group-item active">
+            <span class="badge"> {{ post.author }}</span>
+            Author
+          </li>
+
+          <li class="list-group-item active">
+            <span class="badge">{{ post.comments }}</span>
+            comments
+          </li>
+          <li class="list-group-item active">
+            <span class="badge">{{ post.date }}</span>
+          posted on
+        </li>
+        </ul>
+      </div>
+      {% endfor %}
+      {% else %}
+      <div class="alert alert-warning" role="alert"><strong>Sorry ! </strong>No Articles Are available yet</div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block javascript %}
+
+
+<script>
+{% if user.is_authenticated %}
+$("#blogm").addClass('active');
+{% endif %}
+</script>
+
+{% endblock %}

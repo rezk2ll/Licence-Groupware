@@ -3,6 +3,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponseRedirect
 from projects.forms import ProjectForm
 from projects.models import Project
+from tasks.models import task
 # Create your views here.
 def CreateProject(request):
     if request.method == "POST":
@@ -22,6 +23,20 @@ def CreateProject(request):
 
 def ViewProjects(request):
     projectsList = Project.objects.all()
+    for proj in projectsList:
+        try:
+            somme    = 0
+            coef     = 0
+            progress = 0
+            tlist = task.objects.filter(project=proj.id)
+            for t in tlist:
+                coef    += int(t.priority)
+                somme   += (int(t.progress) * int(t.priority))
+            if coef > 0:
+                progress = somme / coef
+            proj.progress = progress
+        except ObjectDoesNotExist:
+            proj.progress = 0
     return render(request , 'projects.html' , {"projects" : projectsList[::-1] , 'nprojects' : projectsList.__len__()})
 
 def DeleteProject(request , projectid):

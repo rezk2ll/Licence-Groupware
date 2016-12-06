@@ -2,10 +2,8 @@
 
 
 {% block content %}
-<div class="container">
-    <div class="row">
-        <div class="col-md-9 col-md-offset-1">
-            <div class="panel panel-warning">
+        <div class="col-md-15 col-md-offset-1">
+            <div class="panel panel-primary">
                 <div class="panel-heading">
                     <h2 class="panel-title">Emails <a href="/mail/send" class="pull-right"> <span class="glyphicon glyphicon-send pull-right"> </span> New </a></h2>
                 </div>
@@ -29,15 +27,12 @@
                     {% endfor %}
                   </div>
                   {% else %}
-
                   <div class="alert alert-warning" role="alert"><strong>Sorry ! </strong>you have no mails for now</div>
                   {% endif %}
 
                 </div>
             </div>
         </div>
-    </div>
-</div>
 
 {% endblock %}
 

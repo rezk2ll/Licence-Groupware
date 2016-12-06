@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% load staticfiles%}
+{% block content %}
+
+<div class="col-md-11 col-md-offset-1">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <div class="page-header">
+        <h1>{{post.title}}{% if user.is_staff %} <a href="/blog/edit/{{post.id}}" class="pull-right"> <span class="glyphicon glyphicon-cog pull-right"> </span></a> <a href="/blog/delete/{{post.id}}" class="pull-right"> <span class="glyphicon glyphicon-remove pull-right"> </span></a> {% endif %}</h1>
+        <div class="blog-post-meta">by <a href="#">{{post.author}}</a></div>
+      </div>
+      <span class="glyphicon glyphicon-time"></span> Posted on {{ post.date }}</p>
+    </div>
+    <div class="panel-body">
+      <p class="lead">
+        {{ post.body|safe|urlize|urlizetrunc:15 }}
+      </p>
+      {% if user.is_authenticated %}
+      <div class="well well-sm">
+        {% if commenterror %}
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> {{ commenterror }} <br>
+        {% endif %}
+        <hr/>
+        <h4>Leave a Comment:</h4>
+        <form role="form" action="/blog/{{post.id}}/comment" method="post">
+          {% csrf_token %}
+          <textarea class="form-control" cols="40" id="id_commtext" name="bodytext" rows="4" required></textarea>
+          <br>
+          <button type="submit" class="btn btn-primary">Comment</button>
+        </form>
+      </div>
+      {% endif %}
+      {% if comments %}
+      {% for co in comments %}
+      <div class="row">
+        <div class="col-sm-1">
+          <div class="thumbnail">
+            <img src="{% static "img/user.png" %}" alt=""/>
+          </div>
+        </div>
+        <div class="col-lg-9">
+          <div class="panel panel-default">
+            <div class="panel-heading panel-comment">
+              {% if user.is_staff %}
+            </span></a> <a href="/blog/{{post.id}}/comment/{{co.id}}/delete" class="pull-right"> <span class="glyphicon glyphicon-remove pull-right"> </span></a>
+               {% endif %}
+              <strong>{{co.poster}}</strong> <span class="text-muted">{{co.date}}</span>
+            </div>
+            <div class="panel-body">
+              {{ co.bodytext }}
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+    {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block javascript %}
+
+
+<script>
+{% if user.is_authenticated %}
+$("#blogm").addClass('active');
+{% endif %}
+</script>
+
+{% endblock %}

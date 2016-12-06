@@ -2,7 +2,6 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.models import User
 from accounts.forms import UserCreationForm
-
 def register(request):
     if request.method == "POST":
         uform = UserCreationForm(request.POST)
