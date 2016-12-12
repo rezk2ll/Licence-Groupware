@@ -33,8 +33,9 @@ STATICFILES_DIRS = [
 ]
 
 UPLOAD_DIR = BASE_DIR + "/uploads/"
+AVATAR_DIR = BASE_DIR + "/static/img/"
 # Application definition
-
+APPEND_SLASH=False
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',

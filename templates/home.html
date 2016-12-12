@@ -3,8 +3,43 @@
 {% block title %}django-bootstrap3{% endblock %}
 
 {% block content %}
-<div class="jumbotron text-center">
-<h1>WELCOME</h1>
+
+<div class="col-md-10 col-md-offset-1 jumbotron">
+  <div class="text-center">
+    <h1>Welcome</h1>
+      <h3> to license Groupware</h3><br>
+  </div>
+<div class="panel panel-warning">
+  <div class="panel-heading text-center">
+    Our Stats <span class="glyphicon glyphicon-stats"></span>
+  </div>
+  <ul class="list-group">
+    <li class="list-group-item active">
+      <span class="badge"> {{ users }}</span>
+      Members
+    </li>
+    <li class="list-group-item active">
+      <span class="badge">{{ projects }}</span>
+      Projects
+    </li>
+    <li class="list-group-item active">
+      <span class="badge">{{ tasks }}</span>
+      Tasks
+    </li>
+    <li class="list-group-item active">
+      <span class="badge">{{ files }}</span>
+     Files
+    </li>
+    <li class="list-group-item active">
+      <span class="badge">{{ posts }}</span>
+     Posts
+    </li>
+    <li class="list-group-item active">
+      <span class="badge">{{ comms }}</span>
+     Comments
+    </li>
+  </ul>
+</div>
 </div>
 {% endblock %}
 

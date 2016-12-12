@@ -3,7 +3,6 @@ from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist
 from os import remove
 from django.utils.encoding import smart_str
-from wsgiref.util import FileWrapper
 # Create your views here.
 
 from files.models import Filemodel

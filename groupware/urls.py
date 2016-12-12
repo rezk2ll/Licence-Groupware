@@ -16,9 +16,9 @@ Including another URLconf
 from django.conf.urls import url , include
 from django.contrib import admin
 from groupware.views import *
-from accounts.views import register
+from accounts.views import register , change_avatar
 from messaging.views import send_mail , inbox , readmail , deletemail
-from django.contrib.auth.views import login , logout
+from django.contrib.auth.views import login , logout , password_change , password_change_done
 from tasks.views import CreateTask , ViewTasks  ,DeleteTask , EditTask
 from projects.views import CreateProject , ViewProjects , DeleteProject
 from blog.views import viewPosts , NewPost , DeletePost , viewPost , postComment , DeleteComment , EditPost
@@ -29,6 +29,9 @@ urlpatterns = [
     url(r'^login$',login),
     url(r'^logout$',logout),
     url(r'^register$',register),
+    url(r'^change-password$',password_change,name="password-change"),
+    url(r'^change-password-done$',password_change_done,name="password_change_done"),
+    url(r'^change-avatar$',change_avatar),
     url(r'^mail$',inbox),
     url(r'^mail/send$',send_mail),
     url(r'^mail/inbox/(\d+)$',readmail),

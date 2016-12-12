@@ -32,8 +32,8 @@ def viewPost(request , postid):
     c =""
     cf= CommentForm()
     try:
-        p = Post.objects.get(id=postid)
-        c = Comment.objects.filter(post=postid)
+        p    = Post.objects.get(id=postid)
+        c    = Comment.objects.filter(post=postid)
     except ObjectDoesNotExist:
         if p == None:
             return HttpResponseRedirect("/blog")
@@ -67,6 +67,7 @@ def EditPost(request , postid):
                     p = Post.objects.get(id=postid)
                     p.title = pform.cleaned_data['title']
                     p.body  = bleach.clean(pform.cleaned_data['body'])
+                    p.body = p.body.replace("\n" , "<br>")
                     p.save()
                     return HttpResponseRedirect("/blog/%s" % postid)
                 except ObjectDoesNotExist:

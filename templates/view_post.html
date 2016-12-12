@@ -7,7 +7,10 @@
     <div class="panel-heading">
       <div class="page-header">
         <h1>{{post.title}}{% if user.is_staff %} <a href="/blog/edit/{{post.id}}" class="pull-right"> <span class="glyphicon glyphicon-cog pull-right"> </span></a> <a href="/blog/delete/{{post.id}}" class="pull-right"> <span class="glyphicon glyphicon-remove pull-right"> </span></a> {% endif %}</h1>
-        <div class="blog-post-meta">by <a href="#">{{post.author}}</a></div>
+        <div class="blog-post-meta">by <a href="#">{{post.author}}</a>
+          {% static "" as baseUrl %}
+        <img src="{{baseUrl}}img/{{post.author}}" class="blog_avatar img-responsive img-thumbnail"></img>
+        </div>
       </div>
       <span class="glyphicon glyphicon-time"></span> Posted on {{ post.date }}</p>
     </div>
@@ -35,7 +38,8 @@
       <div class="row">
         <div class="col-sm-1">
           <div class="thumbnail">
-            <img src="{% static "img/user.png" %}" alt=""/>
+            {% static "" as baseUrl %}
+            <img src="{{baseUrl}}img/{{co.poster}}" class="img-thumbnail" alt=""/>
           </div>
         </div>
         <div class="col-lg-9">

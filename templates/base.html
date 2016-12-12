@@ -39,9 +39,19 @@
         </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li>
-          <a href="#">  <span class="glyphicon glyphicon-user"></span> {{ user.username }} </a>
+        <li id="avatarm">
+            {% static "" as baseUrl %}
+          <a href="/change-avatar"> <img src="{{baseUrl}}img/{{user.username}}" class="avatar thumbnail img-responsive"></img></a>
         </li>
+        <li>
+          <a href="#">
+           {{ user.username }}
+         </a>
+        </li>
+        <li id="passm">
+          <a href="/change-password">  <span class="glyphicon glyphicon-wrench"></span></a>
+        </li>
+
         <li id="mailm">
           <a href="/mail">
           <span class="glyphicon glyphicon-envelope" style="padding-top : 1px"></span>
